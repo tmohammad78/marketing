@@ -20,8 +20,7 @@ export default function Home() {
   return (
     <div className="container mx-auto px-5">
       <Intro />
-      <p>
-
+      <div>
           <h2>Check out Posts</h2>
           <ul style={{ color: "#0070f3" }}>
           {posts.map((post) => (
@@ -30,7 +29,7 @@ export default function Home() {
             </li>
           ))}
         </ul>
-        </p>
+      </div>
     </div>
   );
 }

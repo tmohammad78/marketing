@@ -1,18 +1,20 @@
 import Link from "next/link";
 import Data from "../../db/data";
-import Image from "next/image";
 
 const Post = ({
   params: { id },
 }: {
   params: { id: string }
 }) => {
-  const  { title ,description} = getPost(id)
+  const data = getPost(id)
+  if(!data){
+    return
+  }
   return (
     <div>
       <main>
-        <h1>This is {title}.</h1>
-        <p>{description}</p>
+        <h1>This is {data?.title}.</h1>
+        <p>{data?.description}</p>
         <p style={{ color: "#0070f3" }}>
           <Link href="/">Back to Home</Link>
         </p>
@@ -21,9 +23,9 @@ const Post = ({
   );
 };
 
-export const getPost = (id: string) => {
+const getPost = (id: string) => {
   if (!id) {
-    return { props: {} };
+    return;
   }
   
   const post = Data.find(post => post.id === id);
@@ -44,9 +46,9 @@ export async function generateMetadata({
 }: {
   params: { id: string }
 }) {
-  const { title } = getPost(id)
+  const data = getPost(id)
   return {
-    title,
+    title: data?.title,
   }
 }
 
